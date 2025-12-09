@@ -16,6 +16,6 @@ template:
   spec:
     containers:
     - name: mydeploymentcont
-      image: intellipaatsai/prt-task:latest    
+      image: ashishpandey63342/prt-task:latest    
       ports:
         - containerPort: 80
