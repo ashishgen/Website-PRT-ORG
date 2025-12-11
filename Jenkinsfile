@@ -1,45 +1,62 @@
 pipeline {
+
     environment {
-        // Define DockerHub credentials and extract username and password
-        DOCKERHUB_CREDENTIALS = credentials("bbc3b5d3-2472-4914-a57b-4150fa64f034")
-        BRANCH_NAME = 'main'  // Define the branch name (or pass it as a parameter)
+
+        DOCKERHUB_CREDENTIALS = credentials("760cedcb-ee16-4eff-89bb-6b27fc2d02f6")
+
     }
+
     agent {
-        label "J-M"  // Agent where the pipeline will run
+
+        label "K-M"
+
     }
+
+
 
     stages {
-        // Git Stage
+
         stage('Git') {
+
             steps {
-                script {
-                    // Checkout the specified branch from the GitHub repository
-                    git branch: "${main}", url: 'https://github.com/ashishgen/Website-PRT-ORG.git'
-                }
+
+
+                git 'https://github.com/ashishgen/Website-PRT-ORG.git'
+
+
+                git branch: 'main', url: 'https://github.com/ashishgen/Website-PRT-ORG.git'
+
             }
+
         }
 
-        // Docker Stage
         stage('Docker') {
+
             steps {
-                script {
-                    // Docker login using credentials from Jenkins
-                    sh "sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}"
-                    sh "sudo docker build -t ashishpandey63342/prt-task ."
-                    sh "sudo docker push ashishpandey63342/prt-task"
-                }
+
+                sh "sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}"
+
+                sh "sudo docker build /home/ubuntu/jenkins/workspace/Test -t ashishpandey63342/prt-task"
+
+                sh "sudo docker push ashishpandey63342/prt-task"
+
             }
+
         }
 
-        // Kubernetes Stage
         stage('k8s') {
+
             steps {
-                script {
-                    // Apply Kubernetes deployment and service files
-                    sh "kubectl apply -f deploy.yaml"
-                    sh "kubectl apply -f service.yaml"
-                }
+
+                sh "kubectl apply -f deploy.yaml"
+
+                sh "kubectl apply -f service.yaml"
+
             }
+
         }
+
     }
+
 }
+0 commit commentsComments
