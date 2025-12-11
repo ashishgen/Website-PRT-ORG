@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Git') {
             steps {
-                git 'https://github.com/ashishgen/Website-PRT-ORG.git'
+                git branch: 'main', url: 'https://github.com/ashishgen/Website-PRT-ORG.git'
             }
         }
         stage('Docker') {
