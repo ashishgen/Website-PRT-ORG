@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mydeployment
+  name: my-app
   labels:
-    app: apache
+    app: nginx
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
-      app: apache
+      app: nginx
   template:
     metadata:
       labels:
-        app: apache
+        app: nginx
     spec:
       containers:
-        - name: mydeploymentcont
-          image: ashishpandey63342/prt-task:latest
-          ports:
-            - containerPort: 80
+      - name: nginx
+        image: ashishpandey1991/Website-PRT-ORG
+        ports:
+        - containerPort: 80
