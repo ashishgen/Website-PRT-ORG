@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: ashishpandey1991/Website-PRT-ORG
+        image: ashishpandey1991/website-prt-org
         ports:
         - containerPort: 80
